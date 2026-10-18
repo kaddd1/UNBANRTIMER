@@ -44,9 +44,12 @@ function App() {
         <div className="closing-note"><span aria-hidden="true">+</span><p>От звонка до звонка. Без права на УДО.</p><span aria-hidden="true">+</span></div>
       </main>
 
-      <footer className="site-footer flex flex-wrap items-center justify-between gap-4">
-        <span>ЗОНА / COUNTDOWN <span className="footer-slash">/</span> ЛИЧНЫЙ ПРОЕКТ</span>
-        <span className="footer-end"><span className="red-text">●</span> ДЕЛО № 001 · ОСОБЫЙ УЧЁТ</span>
+      <footer className="site-footer">
+        <span className="footer-start">
+          <span className="footer-brand">ЗОНА / COUNTDOWN</span>
+          <span className="footer-project"><span className="footer-slash">/</span><span>ЛИЧНЫЙ ПРОЕКТ</span></span>
+        </span>
+        <span className="footer-end"><span className="red-text">●</span><span>ДЕЛО № 001 · ОСОБЫЙ УЧЁТ</span></span>
       </footer>
     </div>
   )

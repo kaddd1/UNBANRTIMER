@@ -56,9 +56,13 @@
 .time-unit--accent .time-label { color: #ff6975; }
 .closing-note { display: flex; justify-content: space-between; align-items: center; color: #555861; margin-top: 34px; font-size: 14px; }
 .closing-note p { color: #8c8f98; font-size: 9px; letter-spacing: .2em; margin: 0; text-align: center; padding: 0 12px; }
-.site-footer { min-height: 77px; border-top: 1px solid #ffffff12; font-size: 9px; color: #858892; letter-spacing: .045em; }
-.footer-slash { padding: 0 8px; color: #ff4655; }
-.footer-end .red-text { font-size: 7px; margin-right: 7px; }
+.site-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; min-height: 77px; border-top: 1px solid #ffffff12; font-size: 9px; line-height: 14px; color: #858892; letter-spacing: .045em; }
+.footer-start, .footer-project, .footer-end { display: inline-flex; align-items: center; gap: 8px; }
+.footer-start { flex-wrap: wrap; }
+.footer-brand, .footer-project, .footer-end { white-space: nowrap; }
+.footer-end { margin-left: auto; }
+.footer-slash { color: #ff4655; }
+.footer-end .red-text { font-size: 7px; }
 .freedom-panel { min-height: 250px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 32px 12px; background: radial-gradient(ellipse at center, #ff465510, transparent 70%); }
 .freedom-panel h2 { color: #ff4655; font-size: clamp(46px, 12vw, 180px); font-weight: 850; letter-spacing: -.05em; line-height: 1.1; margin: 12px 0; }
 .freedom-panel p { color: #a2a4ac; font-size: 13px; max-width: 440px; text-align: center; line-height: 1.6; }
@@ -70,7 +74,7 @@
 }
 @media (min-width: 601px) { .intro:not(.intro--complete) h1 { white-space: nowrap; } }
 @media (min-width: 1600px) { .main-content { padding-top: 75px; padding-bottom: 55px; } .intro { margin-top: 38px; margin-bottom: 55px; } }
-@media (max-width: 900px) { .footer-end { display: none; } .time-value { font-size: 11vw; } }
+@media (max-width: 900px) { .time-value { font-size: 11vw; } }
 @media (max-width: 600px) {
   .site-header { min-height: 77px; flex-wrap: wrap; padding-block: 16px; gap: 12px; }
   .wordmark { font-size: 11px; }

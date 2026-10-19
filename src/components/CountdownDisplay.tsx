@@ -1,4 +1,5 @@
 import type { Countdown } from '../lib/countdown'
+import { pluralizeRussian } from '../lib/pluralizeRussian'
 import { TimeUnit } from './TimeUnit'
 
 interface CountdownDisplayProps {
@@ -19,10 +20,10 @@ export function CountdownDisplay({ countdown }: CountdownDisplayProps) {
         </div>
       ) : (
         <dl className="timer-grid" role="timer" aria-live="off" aria-label="Оставшееся время">
-          <TimeUnit value={countdown.days} label="ДНИ" index="01" />
-          <TimeUnit value={countdown.hours} label="ЧАСЫ" index="02" />
-          <TimeUnit value={countdown.minutes} label="МИНУТЫ" index="03" />
-          <TimeUnit value={countdown.seconds} label="СЕКУНДЫ" index="04" accent />
+          <TimeUnit value={countdown.days} label={pluralizeRussian(countdown.days, ['ДЕНЬ', 'ДНЯ', 'ДНЕЙ'])} index="01" />
+          <TimeUnit value={countdown.hours} label={pluralizeRussian(countdown.hours, ['ЧАС', 'ЧАСА', 'ЧАСОВ'])} index="02" />
+          <TimeUnit value={countdown.minutes} label={pluralizeRussian(countdown.minutes, ['МИНУТА', 'МИНУТЫ', 'МИНУТ'])} index="03" />
+          <TimeUnit value={countdown.seconds} label={pluralizeRussian(countdown.seconds, ['СЕКУНДА', 'СЕКУНДЫ', 'СЕКУНД'])} index="04" accent />
         </dl>
       )}
     </div>

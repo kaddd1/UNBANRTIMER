@@ -1,3 +1,4 @@
+import { CaseFiles } from './components/CaseFiles'
 import { SentenceProgress } from './components/SentenceProgress'
 import { CountdownDisplay } from './components/CountdownDisplay'
 import { ReleaseDetails } from './components/ReleaseDetails'
@@ -42,6 +43,7 @@ function App() {
           <ReleaseDetails endsAt={countdownConfig.endsAt} timeZone={countdownConfig.timeZone} />
         </section>
         <div className="closing-note"><span aria-hidden="true">+</span><p>От звонка до звонка. Без права на УДО.</p><span aria-hidden="true">+</span></div>
+        <CaseFiles />
       </main>
 
       <footer className="site-footer">

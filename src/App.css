@@ -54,7 +54,7 @@
 .time-unit--accent { background: linear-gradient(180deg, #ff465500, #ff465508); }
 .time-unit--accent .time-value { color: #ff4655; text-shadow: 0 0 45px #ff465512; }
 .time-unit--accent .time-label { color: #ff6975; }
-.closing-note { display: flex; justify-content: space-between; align-items: center; color: #555861; margin-top: 34px; font-size: 14px; }
+.closing-note { display: flex; justify-content: space-between; align-items: center; color: #555861; margin-top: clamp(22px, 2.4vw, 34px); font-size: 14px; }
 .closing-note p { color: #8c8f98; font-size: 9px; letter-spacing: .2em; margin: 0; text-align: center; padding: 0 12px; }
 .site-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; min-height: 77px; border-top: 1px solid #ffffff12; font-size: 9px; line-height: 14px; color: #858892; letter-spacing: .045em; }
 .footer-start, .footer-project, .footer-end { display: inline-flex; align-items: center; gap: 8px; }
@@ -96,7 +96,7 @@
   .time-value { font-size: clamp(60px, 21vw, 116px); }
   .time-label { order: 1; font-size: 9px; margin-top: 8px; }
   .unit-index { top: 10px; left: 10px; font-size: 8px; }
-  .closing-note { margin-top: 23px; }
+  .closing-note { margin-top: 19px; }
   .closing-note p { font-size: 8px; letter-spacing: .12em; }
   .site-footer { padding: 20px 0; gap: 10px; font-size: 8px; }
   .freedom-panel { min-height: 310px; }

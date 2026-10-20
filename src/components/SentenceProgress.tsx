@@ -6,7 +6,6 @@ interface SentenceProgressProps {
   endsAt: string
 }
 
-/** Receives the existing countdown's once-per-second parent render. */
 export function SentenceProgress({ startsAt, endsAt }: SentenceProgressProps) {
   const progress = getTermProgress(startsAt, endsAt)
   const heading = progress === 100 ? 'СРОК ОТМОТАН' : 'СРОК ОТБЫТ'

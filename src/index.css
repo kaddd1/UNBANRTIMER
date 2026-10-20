@@ -24,7 +24,6 @@ a { color: inherit; text-decoration: none; }
 a:focus-visible { outline: 2px solid #ff4655; outline-offset: 8px; }
 ::selection { color: #fff; background: #932a35; }
 
-/* Prevent incidental selection of interface labels, keeping dossier content copyable. */
 .site-header,
 .site-footer,
 .intro,

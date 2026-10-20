@@ -1,4 +1,3 @@
-/** Null means the configured start is missing or the interval is invalid. */
 export function getTermProgress(
   startsAt: string | null,
   endsAt: string,
@@ -15,7 +14,6 @@ export function getTermProgress(
   return Math.min(100, Math.max(0, ((now - start) / (end - start)) * 100))
 }
 
-/** Keep 100.00% exclusive to completion; nearest rounding would show it early. */
 export function formatTermProgress(progress: number | null): string {
   if (progress === null) return '—'
   const displayedProgress = progress < 100 ? Math.min(progress, 99.99) : progress

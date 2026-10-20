@@ -31,7 +31,6 @@ export const ReleaseDetails = memo(function ReleaseDetails({ endsAt, timeZone }:
     timers.current = []
     changeState('offer')
     if (moveFocus) {
-      // Wait until React removes inert from the back face.
       timers.current.push(setTimeout(() => submitButton.current?.focus({ preventScroll: true }), 0))
     }
   }

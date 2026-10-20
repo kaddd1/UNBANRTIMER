@@ -3,7 +3,6 @@ import { test } from 'node:test'
 import { formatTermProgress, getTermProgress } from '../src/lib/progress.ts'
 import { countdownConfig } from '../src/config/countdown.ts'
 
-// Synthetic interval for calculation tests, not an assumed real ban start.
 const start = '2026-01-01T00:00:00Z'
 const end = '2026-01-11T00:00:00Z'
 const startTime = Date.parse(start)

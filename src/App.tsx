@@ -1,4 +1,5 @@
 import { CaseFiles } from './components/CaseFiles'
+import { WorldClocks } from './components/WorldClocks'
 import { SentenceProgress } from './components/SentenceProgress'
 import { CountdownDisplay } from './components/CountdownDisplay'
 import { ReleaseDetails } from './components/ReleaseDetails'
@@ -44,6 +45,7 @@ function App() {
         </section>
         <div className="closing-note"><span aria-hidden="true">+</span><p>От звонка до звонка. Без права на УДО.</p><span aria-hidden="true">+</span></div>
         <CaseFiles />
+        <WorldClocks />
       </main>
 
       <footer className="site-footer">

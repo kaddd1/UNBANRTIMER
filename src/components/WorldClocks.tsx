@@ -4,8 +4,8 @@ import { getWorldTime } from '../lib/worldTime'
 import './WorldClocks.css'
 
 const cities = [
-  { name: 'ТАШКЕНТ', timeZone: 'Asia/Tashkent', code: 'TAS', index: '01' },
-  { name: 'ЛОНДОН', timeZone: 'Europe/London', code: 'LON', index: '02' },
+  { name: 'ТАШКЕНТ', timeZone: 'Asia/Tashkent', code: 'TAS' },
+  { name: 'ЛОНДОН', timeZone: 'Europe/London', code: 'LON' },
 ] as const
 
 type ClockAngles = ReturnType<typeof getWorldTime>['angles']
@@ -17,38 +17,25 @@ function ClockFace({ angles }: { angles: ClockAngles }) {
   return (
     <div className="world-clock__stage">
       <svg className="world-clock__face" viewBox="0 0 320 320" aria-hidden="true">
-        <path className="world-clock__frame"
-          d="M7 43V7h36 M277 7h18l18 18v18 M313 277v36h-36 M43 313H25L7 295v-18" />
-        <path className="world-clock__frame-accent" d="M7 31V7h24 M289 313h24v-24" />
-        <circle className="world-clock__dial-field" cx="160" cy="160" r="126" />
-        <circle className="world-clock__sector-ring" cx="160" cy="160" r="145"
-          pathLength="360" strokeDasharray="52 8 22 8" transform="rotate(-116 160 160)" />
-        <circle className="world-clock__signal-arc" cx="160" cy="160" r="145"
-          pathLength="360" strokeDasharray="28 332" transform="rotate(-116 160 160)" />
-        <circle className="world-clock__track" cx="160" cy="160" r="134"
-          pathLength="360" strokeDasharray="72 18" transform="rotate(-36 160 160)" />
-
+        <circle className="world-clock__outline" cx="160" cy="160" r="145" />
         {Array.from({ length: 60 }, (_, index) => (
-          <g key={index} transform={`rotate(${index * 6} 160 160)`}>
-            <line
-              className={index % 5 === 0 ? 'world-clock__tick world-clock__tick--major' : 'world-clock__tick'}
-              x1="160" y1="36" x2="160" y2={index % 5 === 0 ? '47' : '41'}
-            />
-            {index % 15 === 0 && <path className="world-clock__cardinal" d="M157 19h6l-3 5Z" />}
-          </g>
+          <line
+            key={index}
+            className={[
+              'world-clock__tick',
+              index % 5 === 0 ? 'world-clock__tick--major' : '',
+              index === 0 ? 'world-clock__tick--north' : '',
+            ].filter(Boolean).join(' ')}
+            x1="160" y1="29" x2="160" y2={index % 5 === 0 ? '41' : '33'}
+            transform={`rotate(${index * 6} 160 160)`}
+          />
         ))}
         <g className="world-clock__numerals">
-          <text x="160" y="67">12</text>
-          <text x="253" y="160">03</text>
-          <text x="160" y="253">06</text>
-          <text x="67" y="160">09</text>
+          <text x="160" y="64">12</text>
+          <text x="256" y="160">3</text>
+          <text x="160" y="256">6</text>
+          <text x="64" y="160">9</text>
         </g>
-        <path className="world-clock__guides" d="M160 82v21 M160 217v21 M82 160h21 M217 160h21" />
-        <circle className="world-clock__reticle" cx="160" cy="160" r="27"
-          pathLength="100" strokeDasharray="15 10" transform="rotate(-27 160 160)" />
-        <path className="world-clock__side-scale"
-          d="M9 142h5 M9 151h8 M9 160h11 M9 169h8 M9 178h5 M306 142h5 M303 151h8 M300 160h11 M303 169h8 M306 178h5" />
-
         {(['hour', 'minute', 'second'] as const).map((hand) => (
           <g
             key={hand}
@@ -58,17 +45,13 @@ function ClockFace({ angles }: { angles: ClockAngles }) {
               '--current-angle': `${angles[hand]}deg`,
             } as HandStyle}
           >
-            {hand === 'hour' && <path d="M157 170V105l6-6v71Z" />}
-            {hand === 'minute' && <path d="M158.5 175V63l3-5v117Z" />}
-            {hand === 'second' && <>
-              <line className="world-clock__second-shaft" x1="160" y1="188" x2="160" y2="36" />
-              <path className="world-clock__second-tip" d="m160 32 3 7h-6Z" />
-              <path className="world-clock__counterweight" d="M157.5 177h5v9h-5Z" />
-            </>}
+            {hand === 'hour' && <path d="M156 171V101l8-5v75Z" />}
+            {hand === 'minute' && <path d="M158.25 175V62l3.5-4v117Z" />}
+            {hand === 'second' && <line x1="160" y1="184" x2="160" y2="35" />}
           </g>
         ))}
-        <path className="world-clock__hub" d="m160 152 8 8-8 8-8-8Z" />
-        <path className="world-clock__pin" d="M158 158h4v4h-4Z" />
+        <circle className="world-clock__hub" cx="160" cy="160" r="5" />
+        <circle className="world-clock__pin" cx="160" cy="160" r="1.8" />
       </svg>
     </div>
   )
@@ -109,7 +92,7 @@ export const WorldClocks = memo(function WorldClocks() {
     <section className="world-clocks" aria-labelledby="world-clocks-title">
       <header className="world-clocks__header">
         <div>
-          <p className="world-clocks__eyebrow">ВРЕМЕННОЙ ПРОТОКОЛ / 02 УЗЛА</p>
+          <p className="world-clocks__eyebrow">ДВА ГОРОДА / ОДИН МОМЕНТ</p>
           <h2 id="world-clocks-title">МИРОВОЕ <span>ВРЕМЯ</span></h2>
         </div>
         <span className="world-clocks__status"><i aria-hidden="true" />В РЕАЛЬНОМ ВРЕМЕНИ</span>
@@ -119,10 +102,6 @@ export const WorldClocks = memo(function WorldClocks() {
           const time = getWorldTime(city.timeZone, clock.now)
           return (
             <article className="world-clock" key={city.timeZone} aria-labelledby={`clock-${city.code}`}>
-              <div className="world-clock__meta" aria-hidden="true">
-                <span className="world-clock__node"><b>{city.index}</b><span>/ {city.code}</span></span>
-                <span className="world-clock__module"><i />TIME MODULE</span>
-              </div>
               <ClockFace key={`${clock.revision}-${time.offset}`} angles={time.angles} />
               <div className="world-clock__readout">
                 <div className="world-clock__location">
@@ -137,9 +116,6 @@ export const WorldClocks = memo(function WorldClocks() {
                     <span className="world-clock__delimiter">:</span>
                     <span className="world-clock__seconds">{time.digital.slice(6)}</span>
                   </time>
-                  <div className="world-clock__time-scale" aria-hidden="true">
-                    <span>ЧАСЫ</span><span>МИНУТЫ</span><span>СЕКУНДЫ</span>
-                  </div>
                 </div>
               </div>
             </article>

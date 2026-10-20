@@ -1,11 +1,12 @@
 .release-details {
-  --release-depth: 10px;
-  --release-half-depth: 5px;
+  --release-depth: 12px;
+  --release-half-depth: 6px;
+  --release-turn-duration: 1.1s;
   overflow: visible;
   position: relative;
   width: min(100%, 640px);
   margin: 28px auto 0;
-  perspective: 1200px;
+  perspective: 1000px;
   text-align: center;
 }
 .release-details__rotator {
@@ -13,9 +14,9 @@
   display: grid;
   overflow: visible;
   transform-style: preserve-3d;
-  /* Cancel the visible face's +5px depth: resting text stays on the z=0 plane. */
+  /* Cancel the visible face's depth: resting text stays on the z=0 plane. */
   transform: translateZ(calc(0px - var(--release-half-depth)));
-  transition: transform .65s cubic-bezier(.22, .7, .22, 1);
+  transition: transform var(--release-turn-duration) cubic-bezier(.45, 0, .55, 1);
 }
 .release-details[data-flipped='true'] .release-details__rotator { transform: translateZ(calc(0px - var(--release-half-depth))) rotateY(180deg); }
 .release-details__face {
@@ -130,7 +131,7 @@
   .release-details__denial h2 { transform: none; }
 }
 
-/* Four outward-facing surfaces join the faces at z = -5px and +5px.
+/* Four outward-facing surfaces join the faces at z = -6px and +6px.
    Keep them siblings of the clipped faces so the 3D volume stays intact. */
 .release-details__edge {
   position: absolute;
@@ -159,3 +160,19 @@
 }
 .release-details__edge--top { top: 0; transform: translateY(-50%) rotateX(90deg); }
 .release-details__edge--bottom { bottom: 0; transform: translateY(50%) rotateX(-90deg); }
+/* Light crosses the sidewalls with the same easing in either direction. */
+.release-details__edge::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, #ff879070, #ff465508 48%, #ffb5bc40);
+  opacity: .15;
+  transition: opacity var(--release-turn-duration) cubic-bezier(.45, 0, .55, 1);
+}
+.release-details__edge--left::after { opacity: .7; }
+.release-details[data-flipped='true'] .release-details__edge::after { opacity: .55; }
+.release-details[data-flipped='true'] .release-details__edge--left::after { opacity: .15; }
+.release-details[data-flipped='true'] .release-details__edge--right::after { opacity: .7; }
+@media (prefers-reduced-motion: reduce) {
+  .release-details__edge::after { transition: none; }
+}

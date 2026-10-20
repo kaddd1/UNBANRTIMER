@@ -23,3 +23,34 @@ button, a { -webkit-tap-highlight-color: transparent; }
 a { color: inherit; text-decoration: none; }
 a:focus-visible { outline: 2px solid #ff4655; outline-offset: 8px; }
 ::selection { color: #fff; background: #932a35; }
+
+/* Prevent incidental selection of interface labels, keeping dossier content copyable. */
+.site-header,
+.site-footer,
+.intro,
+.eyebrow,
+.caption-detail,
+.timer-grid,
+.freedom-panel,
+.sentence-progress,
+.closing-note,
+.release-details__heading,
+.release-details__timezone,
+.release-details__screen,
+.status-badge,
+.prisoner-profile__meta,
+.case-files__header,
+.case-files__registry-meta,
+.case-files__trigger,
+.case-files__annotation,
+.case-files__verdict {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.prisoner-profile__nickname,
+.release-details__date,
+.case-files__body p {
+  -webkit-user-select: text;
+  user-select: text;
+}

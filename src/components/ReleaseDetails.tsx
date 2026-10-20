@@ -42,7 +42,7 @@ export const ReleaseDetails = memo(function ReleaseDetails({ endsAt, timeZone }:
     if (hadFocus) {
       timers.current.push(setTimeout(() => frontButton.current?.focus({ preventScroll: true }), 0))
     }
-    timers.current.push(setTimeout(() => changeState('front'), 650))
+    timers.current.push(setTimeout(() => changeState('front'), 1100))
   }
 
   function submitPetition() {

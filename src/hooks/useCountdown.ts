@@ -1,22 +1,23 @@
 import { useEffect, useState } from 'react'
-import { getCountdown } from '../lib/countdown'
+import { getCountdown, getNextTickDelay } from '../lib/countdown'
 
 export function useCountdown(targetTime: number) {
   const [countdown, setCountdown] = useState(() => getCountdown(targetTime))
 
   useEffect(() => {
-    let intervalId: number | undefined
+    let timeoutId: number | undefined
 
+    // Wake exactly when the displayed second changes, so the countdown stays
+    // in phase with the wall clock instead of lagging by the page-load offset.
     function update() {
       const next = getCountdown(targetTime)
       setCountdown(next)
-      if (next.isComplete) window.clearInterval(intervalId)
+      if (!next.isComplete) timeoutId = window.setTimeout(update, getNextTickDelay(targetTime))
     }
 
     function sync() {
-      window.clearInterval(intervalId)
+      window.clearTimeout(timeoutId)
       if (document.visibilityState === 'hidden') return
-      intervalId = window.setInterval(update, 1000)
       update()
     }
 
@@ -24,7 +25,7 @@ export function useCountdown(targetTime: number) {
     document.addEventListener('visibilitychange', sync)
     window.addEventListener('pageshow', sync)
     return () => {
-      window.clearInterval(intervalId)
+      window.clearTimeout(timeoutId)
       document.removeEventListener('visibilitychange', sync)
       window.removeEventListener('pageshow', sync)
     }

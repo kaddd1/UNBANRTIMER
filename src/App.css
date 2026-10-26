@@ -40,7 +40,7 @@
 .intro p { margin: 22px 0 0; color: #95969d; font-size: 14px; line-height: 1.7; }
 .timer-caption { margin-bottom: 13px; }
 .timer-caption .eyebrow { font-size: 10px; }
-.caption-detail { color: #73757e; font-size: 10px; letter-spacing: .14em; }
+.caption-detail { color: #80828b; font-size: 10px; letter-spacing: .14em; }
 .countdown-display { border-top: 1px solid #ffffff26; border-bottom: 1px solid #ffffff26; position: relative; }
 .countdown-display::before, .countdown-display::after { content: ''; width: 27px; height: 2px; background: #ff4655; position: absolute; z-index: 1; }
 .countdown-display::before { top: -1px; left: 0; }
@@ -55,8 +55,8 @@
 .time-unit--accent .time-value { color: #ff4655; text-shadow: 0 0 45px #ff465512; }
 .time-unit--accent .time-label { color: #ff6975; }
 .closing-note { display: flex; justify-content: space-between; align-items: center; color: #555861; margin-top: clamp(22px, 2.4vw, 34px); font-size: 14px; }
-.closing-note p { color: #8c8f98; font-size: 9px; letter-spacing: .2em; margin: 0; text-align: center; padding: 0 12px; }
-.site-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; min-height: 77px; border-top: 1px solid #ffffff12; font-size: 9px; line-height: 14px; color: #858892; letter-spacing: .045em; }
+.closing-note p { color: #8c8f98; font-size: 10px; letter-spacing: .2em; margin: 0; text-align: center; padding: 0 12px; }
+.site-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; min-height: 77px; border-top: 1px solid #ffffff12; font-size: 10px; line-height: 14px; color: #858892; letter-spacing: .045em; }
 .footer-start, .footer-project, .footer-end { display: inline-flex; align-items: center; gap: 8px; }
 .footer-start { flex-wrap: wrap; }
 .footer-brand, .footer-project, .footer-end { white-space: nowrap; }
@@ -80,11 +80,11 @@
   .wordmark { font-size: 11px; }
   .wordmark-divider { margin: 0 7px; }
   .brand-mark { margin-right: 10px; width: 19px; }
-  .header-label { display: block; font-size: 8px; letter-spacing: .04em; }
+  .header-label { display: block; font-size: 10px; letter-spacing: .04em; }
   .main-content { padding: 38px 0 28px; }
-  .section-meta { align-items: flex-start; gap: 14px; }
-  .section-meta .eyebrow { font-size: 9px; letter-spacing: .08em; }
-  .status-badge { font-size: 8px; padding: 6px 8px; }
+  .section-meta { align-items: flex-start; gap: 14px 8px; }
+  .section-meta .eyebrow { font-size: 10px; letter-spacing: .04em; }
+  .status-badge { gap: 7px; font-size: 10px; letter-spacing: .05em; padding: 6px 8px; }
   .intro { margin: 28px 0 32px; }
   .intro h1 { font-size: clamp(32px, 10.4vw, 61px); }
   .intro--complete h1 { font-size: clamp(23px, 8vw, 48px); }
@@ -94,10 +94,10 @@
   .time-unit:nth-child(3) { border-left: 0; }
   .time-unit:nth-child(n+3) { border-top: 1px solid #ffffff12; }
   .time-value { font-size: clamp(60px, 21vw, 116px); }
-  .time-label { order: 1; font-size: 9px; margin-top: 8px; }
+  .time-label { order: 1; font-size: 10px; margin-top: 8px; }
   .unit-index { top: 10px; left: 10px; font-size: 8px; }
   .closing-note { margin-top: 19px; }
-  .closing-note p { font-size: 8px; letter-spacing: .12em; }
-  .site-footer { padding: 20px 0; gap: 10px; font-size: 8px; }
+  .closing-note p { font-size: 10px; letter-spacing: .12em; }
+  .site-footer { padding: 20px 0; gap: 10px; font-size: 10px; }
   .freedom-panel { min-height: 310px; }
 }

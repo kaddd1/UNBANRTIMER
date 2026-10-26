@@ -48,7 +48,7 @@
   align-items: center;
   gap: 7px 16px;
   margin: 0;
-  font: 8px/1.6 var(--font-mono);
+  font: 10px/1.6 var(--font-mono);
   letter-spacing: .06em;
 }
 .prisoner-profile__case { color: #a6a0a7; }
@@ -63,7 +63,7 @@
   .prisoner-profile { gap: 14px; margin-bottom: 22px; }
   .prisoner-profile__avatar-frame { width: 56px; height: 56px; }
   .prisoner-profile__nickname { margin-bottom: 8px; font-size: 22px; }
-  .prisoner-profile__meta { gap: 5px 12px; font-size: 7px; letter-spacing: .04em; }
+  .prisoner-profile__meta { gap: 5px 12px; font-size: 10px; letter-spacing: .04em; }
 }
 @media (prefers-reduced-motion: reduce) {
   .prisoner-profile::before,

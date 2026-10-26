@@ -13,7 +13,7 @@
 .world-clocks__eyebrow {
   margin: 0 0 12px;
   color: #a6a0a7;
-  font: 9px/1.6 var(--font-mono);
+  font: 10px/1.6 var(--font-mono);
   letter-spacing: .14em;
 }
 .world-clocks__header h2 {
@@ -30,7 +30,7 @@
   align-items: center;
   gap: 9px;
   color: #a6a0a7;
-  font: 8px/1.6 var(--font-mono);
+  font: 10px/1.6 var(--font-mono);
   letter-spacing: .08em;
 }
 .world-clocks__status i { width: 4px; height: 4px; background: #ff4655; }
@@ -102,7 +102,7 @@
   flex-shrink: 0;
   margin: 0;
   color: #a2aab5;
-  font: 9px/1.5 var(--font-mono);
+  font: 10px/1.5 var(--font-mono);
   font-variant-numeric: tabular-nums;
   letter-spacing: .02em;
 }
@@ -138,13 +138,13 @@
 }
 @media (max-width: 600px) {
   .world-clocks__header { margin-bottom: 22px; }
-  .world-clocks__eyebrow { font-size: 8px; letter-spacing: .08em; }
-  .world-clocks__status { font-size: 7px; }
+  .world-clocks__eyebrow { font-size: 10px; letter-spacing: .08em; }
+  .world-clocks__status { font-size: 10px; }
   .world-clocks__grid { grid-template-columns: minmax(0, 1fr); gap: 18px; }
   .world-clock { padding: 20px 18px; }
   .world-clock__stage { width: min(100%, 310px); margin-bottom: 18px; }
   .world-clock__readout { max-width: 310px; padding-top: 15px; }
   .world-clock__digital { font-size: clamp(30px, 10vw, 42px); }
   .world-clock h3 { font-size: 12px; letter-spacing: .12em; }
-  .world-clock__offset { font-size: 8px; }
+  .world-clock__offset { font-size: 10px; }
 }

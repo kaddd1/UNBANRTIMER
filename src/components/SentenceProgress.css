@@ -65,5 +65,5 @@
 }
 @media (max-width: 600px) {
   .sentence-progress { margin-top: 22px; }
-  .sentence-progress__heading { font-size: 9px; margin-bottom: 10px; }
+  .sentence-progress__heading { font-size: 10px; margin-bottom: 10px; }
 }

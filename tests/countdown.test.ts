@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { getCountdown } from '../src/lib/countdown.ts'
+import { getCountdown, getNextTickDelay } from '../src/lib/countdown.ts'
 import { countdownConfig } from '../src/config/countdown.ts'
 
 const target = Date.parse(countdownConfig.endsAt)
@@ -38,4 +38,32 @@ test('recalculates from wall time after a long pause or reload', () => {
 test('rejects invalid date values', () => {
   assert.throws(() => getCountdown(Number.NaN, target))
   assert.throws(() => getCountdown(target, Number.NaN))
+})
+
+test('next tick wakes at the moment the displayed second changes', () => {
+  assert.equal(getNextTickDelay(target, target - 5400), 400)
+  assert.equal(getNextTickDelay(target, target - 5000), 1000)
+  assert.equal(getNextTickDelay(target, target - 400), 400)
+  assert.equal(getNextTickDelay(target, target - 1), 1)
+})
+
+test('next tick stops asking for a delay once the release has passed', () => {
+  assert.equal(getNextTickDelay(target, target), 0)
+  assert.equal(getNextTickDelay(target, target + 5000), 0)
+})
+
+test('ticking by the computed delay never skips or repeats a second, even with timer jitter', () => {
+  const jitter = [0, 3, 12, 0, 7, 1, 25, 0, 4, 9]
+  let now = target - 60000 - 537
+  let shown = getCountdown(target, now).seconds
+  let steps = 0
+  while (!getCountdown(target, now).isComplete && steps < 200) {
+    now += getNextTickDelay(target, now) + jitter[steps % jitter.length]
+    const next = getCountdown(target, now)
+    if (!next.isComplete) assert.equal((shown - next.seconds + 60) % 60, 1, `step ${steps}`)
+    shown = next.seconds
+    steps++
+  }
+  assert.ok(getCountdown(target, now).isComplete)
+  assert.ok(now - target < 30, 'completion is detected within the timer jitter of the release')
 })

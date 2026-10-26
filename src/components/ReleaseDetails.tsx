@@ -1,4 +1,4 @@
-import { memo, useEffect, useRef, useState } from 'react'
+import { memo, useEffect, useEffectEvent, useRef, useState } from 'react'
 import './ReleaseDetails.css'
 
 interface ReleaseDetailsProps {
@@ -18,7 +18,33 @@ export const ReleaseDetails = memo(function ReleaseDetails({ endsAt, timeZone }:
   const backFace = useRef<HTMLDivElement>(null)
   const flipped = state === 'offer' || state === 'processing' || state === 'denied'
 
+  const focusTarget = useRef<'submit' | 'front' | null>(null)
+
   useEffect(() => () => timers.current.forEach(clearTimeout), [])
+
+  // The face being focused stays inert until the new state is committed,
+  // so focus has to move after render rather than from a timer.
+  useEffect(() => {
+    if (focusTarget.current === 'submit' && state === 'offer') {
+      submitButton.current?.focus({ preventScroll: true })
+    } else if (focusTarget.current === 'front' && (state === 'closing' || state === 'returning')) {
+      frontButton.current?.focus({ preventScroll: true })
+    } else {
+      return
+    }
+    focusTarget.current = null
+  }, [state])
+
+  const closeOnOutsidePointer = useEffectEvent((event: PointerEvent) => {
+    if (!cardRef.current?.contains(event.target as Node)) returnToDate()
+  })
+
+  // Touch has no pointerleave, and iOS does not blur on taps outside the card.
+  useEffect(() => {
+    if (state !== 'offer') return
+    document.addEventListener('pointerdown', closeOnOutsidePointer)
+    return () => document.removeEventListener('pointerdown', closeOnOutsidePointer)
+  }, [state])
 
   function changeState(next: CardState) {
     stateRef.current = next
@@ -29,18 +55,16 @@ export const ReleaseDetails = memo(function ReleaseDetails({ endsAt, timeZone }:
     if (stateRef.current !== 'front' && stateRef.current !== 'closing') return
     timers.current.forEach(clearTimeout)
     timers.current = []
+    // The front face is about to become inert; blur it now so that the resulting
+    // focus loss is not mistaken for the user leaving the card.
+    if (cardRef.current?.contains(document.activeElement)) (document.activeElement as HTMLElement).blur()
+    focusTarget.current = moveFocus ? 'submit' : null
     changeState('offer')
-    if (moveFocus) {
-      timers.current.push(setTimeout(() => submitButton.current?.focus({ preventScroll: true }), 0))
-    }
   }
 
   function returnToDate() {
-    const hadFocus = cardRef.current?.contains(document.activeElement)
+    focusTarget.current = cardRef.current?.contains(document.activeElement) ? 'front' : null
     changeState(stateRef.current === 'offer' ? 'closing' : 'returning')
-    if (hadFocus) {
-      timers.current.push(setTimeout(() => frontButton.current?.focus({ preventScroll: true }), 0))
-    }
     timers.current.push(setTimeout(() => changeState('front'), 1100))
   }
 

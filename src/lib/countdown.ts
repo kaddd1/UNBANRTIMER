@@ -22,3 +22,9 @@ export function getCountdown(targetTime: number, now = Date.now()): Countdown {
     isComplete: remaining === 0,
   }
 }
+
+export function getNextTickDelay(targetTime: number, now = Date.now()): number {
+  const remaining = targetTime - now
+  if (remaining <= 0) return 0
+  return remaining % 1000 || 1000
+}
